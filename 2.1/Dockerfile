@@ -20,11 +20,13 @@ ENV ELASTICSEARCH_VERSION 2.1.2
 ENV ELASTICSEARCH_REPO_BASE http://packages.elasticsearch.org/elasticsearch/2.x/debian
 
 RUN echo "deb $ELASTICSEARCH_REPO_BASE stable main" > /etc/apt/sources.list.d/elasticsearch.list
+RUN echo "deb http://packages.elastic.co/curator/3/debian stable main" > /etc/apt/sources.list.d/curator.list
 
 RUN set -x \
-	&& apt-get update \
-	&& apt-get install -y --no-install-recommends elasticsearch=$ELASTICSEARCH_VERSION \
-	&& rm -rf /var/lib/apt/lists/*
+ && apt-get update \
+ && apt-get install -y --no-install-recommends elasticsearch=$ELASTICSEARCH_VERSION \
+ && apt-get install cron, python-elasticsearch-curator \
+ && rm -rf /var/lib/apt/lists/*
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH
 
