@@ -25,7 +25,7 @@ RUN echo "deb http://packages.elastic.co/curator/3/debian stable main" > /etc/ap
 RUN set -x \
  && apt-get update \
  && apt-get install -y --no-install-recommends elasticsearch=$ELASTICSEARCH_VERSION \
- && apt-get install cron, python-elasticsearch-curator \
+ && apt-get install cron python-elasticsearch-curator \
  && rm -rf /var/lib/apt/lists/*
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH
