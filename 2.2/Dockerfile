@@ -18,12 +18,15 @@ RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 46095ACC85485
 
 ENV ELASTICSEARCH_VERSION 2.2.2
 ENV ELASTICSEARCH_REPO_BASE http://packages.elasticsearch.org/elasticsearch/2.x/debian
+ENV ELASTICSEARCH_CURATOR_BASE http://packages.elastic.co/curator/3/debian
 
 RUN echo "deb $ELASTICSEARCH_REPO_BASE stable main" > /etc/apt/sources.list.d/elasticsearch.list
+RUN echo "deb $ELASTICSEARCH_CURATOR_BASE stable main" > /etc/apt/sources.list.d/curator.list
 
 RUN set -x \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends elasticsearch=$ELASTICSEARCH_VERSION \
+	&& apt-get install -y --no-install-recommends python-elasticsearch-curator cron
 	&& rm -rf /var/lib/apt/lists/*
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH
