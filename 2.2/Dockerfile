@@ -50,8 +50,6 @@ VOLUME /usr/share/elasticsearch/data
 
 COPY docker-entrypoint.sh /
 
-RUN cp /usr/share/elasticsearch/config/curator-cron /etc/cron.d/curator-cron
-RUN chmod 0644 /etc/cron.d/curator-cron
 
 EXPOSE 9200 9300
 ENTRYPOINT ["/docker-entrypoint.sh"]
